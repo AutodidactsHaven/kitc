@@ -3,6 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define DARRAY_DEFAULT_CAPACITY 64
+#define DARRAY_RESIZE_FACTOR 3
+
 /// Dynamic array (think C++/Rust's vector/Vec)
 /// resizes memory internally when length exceeds the capacity
 typedef struct darray {
@@ -34,6 +37,27 @@ void darray_free(darray *d) {
     free(d->data);
     free(d);
   }
+}
+
+void* darray_resize(darray *d, size_t capacity) {
+  // resize the internal data block
+  void *new_data = realloc(d->data, d->type_size * capacity);
+  // TODO: error handling
+
+  d->capacity = capacity;
+  d->data = new_data;
+  return new_data;
+}
+
+void darray_push(darray *d, const void *value) {
+  if (d->len >= d->capacity) {
+    size_t new_capacity = d->capacity > 0 ? d->capacity * DARRAY_RESIZE_FACTOR : DARRAY_DEFAULT_CAPACITY;
+    void *resized = darray_resize(d,new_capacity);
+  }
+
+  void *place = d->data + d->len * d->type_size;
+  d->len += 1;
+  memcpy(place, value, d->type_size);
 }
 
 /* TODO
