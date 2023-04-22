@@ -11,7 +11,7 @@
 
 /// Dynamic array (think C++/Rust's vector/Vec)
 /// resizes memory internally when length exceeds the capacity
-typedef struct darray {
+typedef struct kitc_darray {
   // @brief current number of items in the array
   size_t len;
   // @brief total number of items that can fit in the currently allocated memory
@@ -21,39 +21,50 @@ typedef struct darray {
   // @brief storage
   void* data;
 
-} darray;
+} kitc_darray;
 
 /**
  * @brief create a new dynamic array. this function allocates memory for the backing
  *        array as well as for the struct itself
  * @param type_size The size in bytes of the data type being stored in the array (must be homogenous)
  * @param starting_capacity The starting size of the array in terms of number of items
- * @returns A pointer to the darray struct
+ * @returns A pointer to the kitc_darray struct
 */
-darray* darray_new(size_t type_size, size_t starting_capacity);
+kitc_darray* kitc_darray_new(size_t type_size, size_t starting_capacity);
 
-void darray_free(darray *d);
+void kitc_darray_free(kitc_darray *d);
 
-void* darray_resize(darray *d, size_t capacity);
+void* kitc_darray_resize(kitc_darray *d, size_t capacity);
 
-void darray_push(darray *d, const void *value);
+void kitc_darray_push(kitc_darray *d, const void *value);
 
 /**
  * @brief Pops the last item in the array and places it into dest
 */
-void darray_pop(darray *d, void *dest);
+void kitc_darray_pop(kitc_darray *d, void *dest);
+
+/**
+ * @brief Insert a value at a given index
+ * @note O(n) because it has to shift all items to the right of index
+ * @returns ...
+*/
+void kitc_darray_ins(kitc_darray *d, const void *value, size_t index);
+
+/**
+ * @brief clear array by resetting all memory to 0
+*/
+void kitc_darray_clear(kitc_darray *d);
+
+/**
+ * @returns number of items currently in the array
+*/
+size_t kitc_darray_len(kitc_darray *d);
 
 /* TODO
  *
  * Public API
  *
- * darray_pop
- * darray_ins(ert)
- * darray_clear
- * darray_len
  *
- * Private API
- * darray_resize
  */
 
 #endif // KITC_DARRAY_H
