@@ -7,9 +7,7 @@
 void kitc_mat_graph_init(mat_graph *g, int max_vertices) {
   g->V = max_vertices;
   g->E = 0;
-  size_t num_bytes = max_vertices * max_vertices * sizeof(uint8_t);
-  g->adj = malloc(num_bytes);
-  memset(g->adj, 0, num_bytes);
+  g->adj = calloc(max_vertices * max_vertices, sizeof(uint8_t));
 }
 
 /*
