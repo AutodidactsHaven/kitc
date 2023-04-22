@@ -38,6 +38,11 @@ void* darray_resize(darray *d, size_t capacity);
 
 void darray_push(darray *d, const void *value);
 
+/**
+ * @brief Pops the last item in the array and places it into dest
+*/
+void darray_pop(darray *d, void *dest);
+
 /* TODO
  *
  * Public API
