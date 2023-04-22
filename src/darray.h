@@ -1,3 +1,6 @@
+#ifndef KITC_DARRAY_H
+#define KITC_DARRAY_H
+
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
@@ -27,3 +30,18 @@ void darray_free(darray *d);
 void* darray_resize(darray *d, size_t capacity);
 
 void darray_push(darray *d, const void *value);
+
+/* TODO
+ *
+ * Public API
+ *
+ * darray_pop
+ * darray_ins(ert)
+ * darray_clear
+ * darray_len
+ *
+ * Private API
+ * darray_resize
+ */
+
+#endif // KITC_DARRAY_H
