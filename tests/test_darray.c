@@ -2,7 +2,7 @@
 #include "../src/darray.h"
 
 int main() {
-  darray *d = darray_new(600, sizeof(double));
+  darray *d = darray_new(sizeof(double), 10);
   double value = 64.0;
   darray_push(d, &value);
 

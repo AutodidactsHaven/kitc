@@ -23,7 +23,14 @@ typedef struct darray {
 
 } darray;
 
-darray* darray_new(size_t starting_capacity, size_t type_size);
+/**
+ * @brief create a new dynamic array. this function allocates memory for the backing
+ *        array as well as for the struct itself
+ * @param type_size The size in bytes of the data type being stored in the array (must be homogenous)
+ * @param starting_capacity The starting size of the array in terms of number of items
+ * @returns A pointer to the darray struct
+*/
+darray* darray_new(size_t type_size, size_t starting_capacity);
 
 void darray_free(darray *d);
 
