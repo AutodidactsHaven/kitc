@@ -55,19 +55,20 @@ void kitc_darray_pop(kitc_darray *d, void *dest) {
 
 void kitc_darray_ins(kitc_darray *d, const void *value, size_t index) {
   // check if requires resize
-  if (index > d->capacity) {
-    // TODO
+  if (d->len + 1 > d->capacity) {
+    size_t new_capacity = d->capacity > 0 ? d->capacity * DARRAY_RESIZE_FACTOR : DARRAY_DEFAULT_CAPACITY;
+    void *resized = kitc_darray_resize(d,new_capacity);
   }
 
-  // shift that stuff
-  void *index_ptr = d->data + index * d->type_size;
-  void *dest = d->data + (index + 1) * d->type_size;
+  // shift existing data after index
+  void *insert_dest = d->data + index * d->type_size;
+  void *shift_dest =  insert_dest + d->type_size;
 
   int num_items = d->len - index;
 
   d->len += 1;
-  memcpy(dest, index_ptr, num_items * d->type_size);
-  memcpy(index_ptr, value, d->type_size);
+  memcpy(shift_dest, insert_dest, num_items * d->type_size);
+  memcpy(insert_dest, value, d->type_size);
 }
 
 void kitc_darray_clear(kitc_darray *d) {
