@@ -1,3 +1,5 @@
+#ifndef KITC_MAT_GRAPH_H
+#define KITC_MAT_GRAPH_H
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -25,3 +27,4 @@ void kitc_mat_graph_init(mat_graph* graph, int n_vertices);
  */
 bool kitc_mat_graph_ins_edge(mat_graph* graph, edge edge);
 
+#endif
