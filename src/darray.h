@@ -60,11 +60,26 @@ void kitc_darray_clear(kitc_darray *d);
 */
 size_t kitc_darray_len(kitc_darray *d);
 
-/* TODO
- *
- * Public API
- *
- *
- */
+/**
+  @brief an iterator that can be used to iterate through the array more easily
+          than using for loops with variables
+*/
+typedef struct kitc_darray_iter {
+  kitc_darray *array;
+  size_t current_idx;
+} kitc_darray_iter;
+
+/**
+ * @brief creates a support iterator struct
+ * @returns the iterator struct. pass this to `kitc_darray_iter_next`
+*/
+kitc_darray_iter kitc_darray_iter_new(kitc_darray *d);
+
+/**
+ * @returns a pointer to the next element in the array or NULL if you're at the end
+*/
+void* kitc_darray_iter_next(kitc_darray_iter *iterator);
+
+// TODO: decide more functions for public API
 
 #endif // KITC_DARRAY_H

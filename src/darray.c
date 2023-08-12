@@ -80,3 +80,19 @@ void kitc_darray_clear(kitc_darray *d) {
 }
 
 size_t kitc_darray_len(kitc_darray *d) { return d->len; }
+
+kitc_darray_iter kitc_darray_iter_new(kitc_darray *d) {
+  kitc_darray_iter iterator;
+  iterator.array = d;
+  iterator.current_idx = 0;
+  return iterator;
+}
+
+void* kitc_darray_iter_next(kitc_darray_iter *iterator) {
+  if (iterator->current_idx < iterator->array->len) {
+    size_t stride = iterator->array->type_size;
+    return &iterator->array->data[(stride * iterator->current_idx++)]; // postincrement current_idx
+  } else {
+    return NULL;
+  }
+}
