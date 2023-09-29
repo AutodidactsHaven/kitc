@@ -8,7 +8,7 @@ typedef int32_t i32;
 KITC_DECL_TYPED_ARRAY(i32) // this is how we declare a new array type
 
 int main() {
-  i32_darray *ints = i32_darray_new(64); // starting capacity of 64
+  i32_darray *ints = i32_darray_new(1); // starting capacity of 64
 
   // Basic push example
   i32 value = 5;
@@ -17,12 +17,17 @@ int main() {
     value = value + 5;
   }
 
-  i32_darray_print(ints);
-
   i32 last_value;
   i32_darray_pop(ints, &last_value);
   printf("The last value was %d\nThe new len is %zu\n", last_value, ints->len);
+  i32 big = 12;
+  i32_darray_ins(ints, &big, 2);
+  assert(ints->data[2] == big);
   
+  i32_darray_print(ints);
+
+  assert(i32_darray_len(ints) == 5);
+
   return 0;
 }
 
