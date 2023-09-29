@@ -91,7 +91,7 @@ kitc_darray_iter kitc_darray_iter_new(kitc_darray *d) {
 void* kitc_darray_iter_next(kitc_darray_iter *iterator) {
   if (iterator->current_idx < iterator->array->len) {
     size_t stride = iterator->array->type_size;
-    return &iterator->array->data[(stride * iterator->current_idx++)]; // postincrement current_idx
+    return &iterator->array->data[(stride * iterator->current_idx++)];
   } else {
     return NULL;
   }

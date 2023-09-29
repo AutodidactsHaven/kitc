@@ -46,7 +46,6 @@ void kitc_darray_pop(kitc_darray *d, void *dest);
 /**
  * @brief Insert a value at a given index
  * @note O(n) because it has to shift all items to the right of index
- * @returns ...
 */
 void kitc_darray_ins(kitc_darray *d, const void *value, size_t index);
 
