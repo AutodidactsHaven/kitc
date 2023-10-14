@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -88,11 +89,18 @@ kitc_darray_iter kitc_darray_iter_new(kitc_darray *d) {
   return iterator;
 }
 
-void* kitc_darray_iter_next(kitc_darray_iter *iterator) {
+void *kitc_darray_iter_next(kitc_darray_iter *iterator) {
   if (iterator->current_idx < iterator->array->len) {
     size_t stride = iterator->array->type_size;
     return &iterator->array->data[(stride * iterator->current_idx++)];
   } else {
     return NULL;
+  }
+}
+
+void kitc_darray_print_all(kitc_darray *d, debug_print_item print_func) {
+  size_t stride = d->type_size;
+  for (size_t i = 0; i < d->len; i++) {
+    print_func(&d->data[i * stride]);
   }
 }

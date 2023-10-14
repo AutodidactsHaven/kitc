@@ -79,6 +79,7 @@ kitc_darray_iter kitc_darray_iter_new(kitc_darray *d);
 */
 void* kitc_darray_iter_next(kitc_darray_iter *iterator);
 
-// TODO: decide more functions for public API
+typedef void (*debug_print_item) (void *);
+void kitc_darray_print_all(kitc_darray *d, debug_print_item);
 
 #endif // KITC_DARRAY_H
